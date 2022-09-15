@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "table_#{table.attachable_sgid}" do %>
-  <figure class="attachment">
+  <figure class="attachment" data-controller="table-editor" data-table-editor-url-value="<%= table_path(id: table.attachable_sgid) %>">
     <div style="display: flex">
       <%= button_to "+ Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "addRow"} %>
       <%= button_to "- Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "removeRow"} %>
@@ -11,7 +11,7 @@
         <tr>
           <% row.each_with_index do |column, column_index| %>
             <td>
-              <div contenteditable><%= column %></div>
+              <div contenteditable data-action="input->table-editor#updateCell" data-row-index="<%= row_index %>" data-column-index="<%= column_index %>"><%= column %></div>
             </td>
           <% end %>
         </tr>

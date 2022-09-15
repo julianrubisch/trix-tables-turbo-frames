@@ -24,10 +24,15 @@ class TablesController < ApplicationController
       @table.add_column
     elsif params["operation"] == "removeColumn"
       @table.remove_column
+    elsif params["operation"] == "updateCell"
+      @table.content[params["row_index"].to_i][params["column_index"].to_i] = params["value"]
     end
 
     if @table.save
-      redirect_to edit_table_path(id: @table.attachable_sgid)
+      respond_to do |format|
+        format.html { redirect_to edit_table_path(id: @table.attachable_sgid) }
+        format.json {}
+      end
     else
       render :edit
     end
