@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_095741) do
   end
 
   create_table "action_text_tables", force: :cascade do |t|
-    t.json "content", default: "", null: false
+    t.json "content", default: [["", ""], ["", ""]], null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

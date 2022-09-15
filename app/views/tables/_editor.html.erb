@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "table_#{table.attachable_sgid}" do %>
+  <figure class="attachment">
+    <table>
+      <% table.content.each_with_index do |row, row_index| %>
+        <tr>
+          <% row.each_with_index do |column, column_index| %>
+            <td>
+              <div contenteditable><%= column %></div>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </figure>
+<% end %>

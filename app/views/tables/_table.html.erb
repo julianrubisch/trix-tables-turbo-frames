@@ -1,0 +1,13 @@
+<figure class="attachment">
+  <table>
+    <% table.content.each do |row| %>
+      <tr>
+        <% row.each do |column| %>
+          <td>
+            <%= column %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</figure>
