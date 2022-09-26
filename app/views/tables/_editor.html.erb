@@ -1,21 +1,19 @@
-<%= turbo_frame_tag "table_#{table.attachable_sgid}" do %>
-  <figure class="attachment" data-controller="table-editor" data-table-editor-url-value="<%= table_path(id: table.attachable_sgid) %>">
-    <div style="display: flex">
-      <%= button_to "+ Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "addRow"} %>
-      <%= button_to "- Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "removeRow"} %>
-      <%= button_to "+ Column", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "addColumn"} %>
-      <%= button_to "- Column", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "removeColumn"} %>
-    </div>
-    <table>
-      <% table.content.each_with_index do |row, row_index| %>
-        <tr>
-          <% row.each_with_index do |column, column_index| %>
-            <td>
-              <div contenteditable data-action="input->table-editor#updateCell" data-row-index="<%= row_index %>" data-column-index="<%= column_index %>"><%= column %></div>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
-  </figure>
+<%= turbo_frame_tag "table_#{table.attachable_sgid}", data: {controller: "table-editor", table_editor_url_value: table_path(id: table.attachable_sgid)} do %>
+  <div style="display: flex">
+    <%= button_to "+ Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "addRow"} %>
+    <%= button_to "- Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "removeRow"} %>
+    <%= button_to "+ Column", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "addColumn"} %>
+    <%= button_to "- Column", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "removeColumn"} %>
+  </div>
+  <table>
+    <% table.content.each_with_index do |row, row_index| %>
+      <tr>
+        <% row.each_with_index do |column, column_index| %>
+          <td>
+            <div contenteditable data-action="input->table-editor#updateCell" data-row-index="<%= row_index %>" data-column-index="<%= column_index %>"><%= column %></div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
