@@ -1,6 +1,6 @@
 <h1>Editing article</h1>
 
-<%= render "form", article: @article %>
+<%= turbo_frame_tag dom_id(@article, :form), src: form_article_path(@article) %>
 
 <br>
 
